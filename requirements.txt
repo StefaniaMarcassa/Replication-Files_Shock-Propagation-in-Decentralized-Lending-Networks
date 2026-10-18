@@ -1,8 +1,25 @@
-numpy
+# Python 3.9
+#
+# Versions are unpinned because they were not recorded during estimation.
+# Pin them to what you actually ran, from the same environment as the notebooks:
+#
+#   pip freeze | grep -iE "pandas|numpy|scipy|scikit-learn|statsmodels|matplotlib|altair"
+#
+# and paste the result over the block below. A replication package with exact
+# versions is worth the one minute this takes.
+
 pandas
+numpy
 scipy
-statsmodels
 scikit-learn
+statsmodels
 matplotlib
 altair
-jupyter
+
+# Notebooks only
+jupyterlab
+
+# Simulation scripts only, not needed to reproduce the paper from the
+# analysis panel. networkit can be awkward to install on macOS.
+# networkit
+# pathos

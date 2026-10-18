@@ -1,0 +1,24 @@
+# Data. Everything except the analysis panel comes from the Zenodo deposit.
+data/*
+!data/analysis_panel.csv.gz
+!data/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Generated figures and tables. These are produced by running the notebooks.
+# Delete these three lines if you would rather commit them.
+*.pdf
+*.png
+*.tex
+
+# macOS
+.DS_Store

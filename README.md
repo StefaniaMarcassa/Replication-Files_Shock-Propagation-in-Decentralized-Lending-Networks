@@ -1,75 +1,123 @@
-# Replication Files — *Shock Propagation in Decentralized Lending Networks*
+# Shock Propagation in Decentralized Lending Networks: Evidence from the Compound Protocol
 
-Replication package for the paper *Shock Propagation in Decentralized Lending Networks* (Review of Finance, revision round 2).
+Replication code for the paper. Tovanich, Kitzler, Makridis, Marcassa and Prat.
 
-## Repository structure
+The repository holds the code and one analysis-ready panel, about 17 MB in total. The full
+simulation output, roughly 1 GB, is deposited separately because GitHub cannot host files
+of that size.
+
+**Data: `DOI_PLACEHOLDER`** (Zenodo). Replace this line with the DOI once the deposit is
+published.
+
+---
+
+## Reproducing the paper
+
+Every table and figure can be reproduced from `data/analysis_panel.csv.gz`, which ships
+with this repository. You do not need the Zenodo deposit unless you want to rerun the
+simulation or rebuild the panel.
+
+```bash
+git clone https://github.com/StefaniaMarcassa/Replication-Files_Shock-Propagation-in-Decentralized-Lending-Networks.git
+cd Replication-Files_Shock-Propagation-in-Decentralized-Lending-Networks
+pip install -r requirements.txt
+jupyter lab
+```
+
+Then open any notebook in `code/notebooks/` and run it top to bottom.
+
+### The analysis panel
+
+`data/analysis_panel.csv.gz` is 151,440 rows by 168 columns: the four analysis pools
+(ETH, WBTC, DAI, USDC), daily from 1 January 2021 to 15 June 2024, at ten shock sizes and
+three health thresholds. It is the merge of the simulation output and the feature files,
+which the notebooks otherwise build in their first dozen cells.
+
+Filtering it to the estimation sample reproduces the paper's samples exactly:
+
+```python
+import pandas as pd
+panel = pd.read_csv('data/analysis_panel.csv.gz', parse_dates=['date'])
+
+crypto = panel[(panel['asset_group'] == 'Crypto')
+               & (panel['size'] == 0.50)
+               & (panel['health_threshold'] == 10)]
+# 2,524 pool-days: ETH 1,262 and WBTC 1,262
+# training 1,607 to 15 March 2023, test 401 to 1 October 2023
+```
+
+Stablecoin specifications use `asset_group == 'Stablecoin'` and `size == 1.00`.
+
+### Rebuilding the panel from the raw simulation output
+
+Download the Zenodo deposit into `data/`, then run `code/notebooks/Regressions_REVISION.ipynb`
+from the top. Its first cells rebuild the panel from the eleven source files.
+
+---
+
+## What each notebook produces
+
+| Notebook | Paper outputs |
+|---|---|
+| `Regressions_REVISION` | The main liquidity and solvency regressions. Figures 7, 9, 10, 11, 17, 18 and 19; the model-comparison and coefficient tables in Appendix F |
+| `Regressions_DesStats_REVISION` | Descriptive statistics. Figures 3, 4, 5, 6 and 8 |
+| `incremental_liquidity_REVISION_new` | Table 2 and Figure 13, liquidity |
+| `incremental_solvency_REVISION_new` | Table 2 and Figure 13, solvency |
+| `incremental_liquidity_RF_REVISION` | Figure 20, random-forest benchmark, liquidity |
+| `incremental_solvency_RF_REVISION` | Figure 21, random-forest benchmark, solvency |
+| `DataVSSimul_REVISION` | Appendix D. Figures 14 and 15, simulated against realized liquidations |
+| `Regressions_april29_B_all_size_shocks` | Figure 12 |
+| `Regressions_REVISION_all_size_shocks_with_borrowers` | Figure 16, robustness to borrower features |
+| `Robustness_old_vs_new` | **Table 4**, health-restoring against close-factor liquidation |
+| `predictive_tests_STANDALONE` | The Clark–West comparisons in the note to Table 2 |
+
+`code/exploratory/` holds notebooks used during the project that no paper output depends
+on. They are kept for transparency and are not needed to reproduce anything.
+
+## Simulation code
+
+`code/simulation/` contains the shock-propagation simulation that produces the liquidation
+files. It is not needed to reproduce the paper from the analysis panel.
+
+| Script | Produces |
+|---|---|
+| `liquidation.py` | Health-restoring liquidation, crypto pools |
+| `liquidation2.py` | Health-restoring liquidation, ETH and WBTC jointly |
+| `liquidation_real.py` | Close-factor liquidation |
+| `liquidation_real_mul.py` | Close-factor liquidation with an intraday price multiplier |
+| `statistics.py` | Network statistics, centralities and the user-level feature files |
+
+All four liquidation scripts begin with `from debtrank import *`, which resolves to
+`code/simulation/debtrank.py` in this repository.
+
+---
+
+## Requirements
+
+Python 3.9. See `requirements.txt`. `networkit` and `pathos` are needed only by the
+simulation scripts, not by the notebooks.
+
+## Repository layout
 
 ```
-.
-├── paper/
-│   ├── Review_Finance_Round2.tex   # LaTeX source of the paper
-│   └── figures/                    # All figures included in the paper
-├── code/                           # Jupyter notebooks producing tables and figures
-├── data/                           # Input data (CSV files, see data/README.md)
-├── requirements.txt                # Python dependencies
-└── README.md
+code/
+  notebooks/     analysis notebooks, outputs stripped
+  simulation/    shock-propagation code and the debtrank module
+  exploratory/   not needed to reproduce the paper
+data/
+  analysis_panel.csv.gz
 ```
 
-## How to replicate
+`data/` is otherwise empty in git. The Zenodo files land there.
 
-1. Put the input CSV files in `data/` (list in [`data/README.md`](data/README.md)).
-2. Install the dependencies: `pip install -r requirements.txt`
-3. Run the notebooks from inside `code/` (e.g. `cd code && jupyter lab`). Every notebook reads its inputs through
-   `DATA_PATH = '../data/'`. Figures and `.tex` tables are written to the working directory (`code/`);
-   copy the figures used in the paper to `paper/figures/`.
+## Data sources
 
-To compile the paper, run `pdflatex`/`bibtex` from inside `paper/` (the `.tex` refers to images as `figures/...`).
-The bibliography file `refs.bib` and the `informs3` class are not included in this repository.
+Daily snapshots of Compound V2 from 1 January 2020 to 15 June 2024, from The Graph's
+indexed subgraph of the Compound V2 contracts. The hosted subgraph was deprecated after
+June 2024, following The Graph's migration to a decentralized network; by that point
+Compound V2 activity was negligible. Section 4.1 of the paper gives the details.
 
-## Notebooks → tables and figures
+## Citation
 
-| Notebook (`code/`) | Figures | Tables |
-|---|---|---|
-| `Regressions_REVISION.ipynb` | 7, 9, 10, 11, 17, 18, 19 | 5 (Panels A and B), 7, 8, 9, 10, 11 |
-| `incremental_liquidity_RF_REVISION.ipynb` | 20 | |
-| `incremental_solvency_RF_REVISION.ipynb` | 21 | |
-| `Regressions_DesStats_REVISION.ipynb` | 3, 4, 5, 6, 8 | |
-| `DataVSSimul_REVISION.ipynb` | 14, 15 | |
-| `incremental_solvency_REVISION_new.ipynb` | 13 (solvency risk) | 2 (solvency risk) |
-| `incremental_liquidity_REVISION_new.ipynb` | 13 (liquidity risk) | 2 (liquidity risk) |
-| `Regressions_april29_B_all_size_shocks.ipynb` | 12 | |
-| `Regressions_REVISION_all_size_shocks_with_borrowers.ipynb` | 16 | |
-
-Figures 1 and 2 (bipartite network and balance-sheet diagrams) are illustrations and not produced by code.
-
-Additional notebooks (robustness / supporting analyses, not mapped above):
-
-- `Regressions_REVISION_liq_real.ipynb` — same as `Regressions_REVISION.ipynb`, using realized liquidations (`liquidation_real.csv`, `liquidation_pools_real.csv`).
-- `Robustness_old_vs_new.ipynb` — compares results obtained with the original and the realized liquidation files; writes `robustness_old_vs_new.csv` and `close_factor_wedge.csv`.
-- `predictive_tests_STANDALONE.ipynb` — predictive tests (null vs. full model); writes `table2_with_tests.tex`, `pr_curve_null_vs_full.pdf`, `precision_null_vs_full.pdf`.
-
-## Figures → files
-
-| Figure | Label | File (`paper/figures/`) |
-|---|---|---|
-| 1 | `fig:Bipartite_graph` | `Bipartite_Network.png` |
-| 2 | `fig:liquidation_panels` | `Balance_Sheet_PreShock.png`, `Balance_Sheet_PostShock.png` |
-| 3 | `fig:lending_pools` | `lending_pools.pdf` |
-| 4 | `fig:users` | `users.pdf` |
-| 5 | `fig:Pool_Contribution` | `Pool_contribution.png` |
-| 6 | `fig:Share_Borrow` | `Pct_UtilRatio_Borrow.png` |
-| 7 | `fig:r2_by_shock_size` | `shock_size.png` |
-| 8 | `fig:reserve_changes` | `liquidity_risk_mean_new1.png` |
-| 9 | `fig:liquidity_predictions` | `liquidity_risk_prediction_50.png` |
-| 10 | `fig:forecast_errors` | `errors.png` |
-| 11 | `fig:solvency_predictions` | `solvency_risk_predictions.png` |
-| 12 | `fig:solvency_stablecoins_size100` | `solvency_stablecoins.png` |
-| 13 | `fig:incremental` | `incremental_liquidity.png`, `solvency_risk_increment.png` |
-| 14 | `fig:pr_curve` | `precision_recall.png` |
-| 15 | `fig:liquidations_stress` | `liquidations_stress_episodes.png` |
-| 16 | `fig:borrowers_comparison` | `borrowers_crypto.png` |
-| 17 | `fig:robustness_size` | `robustness_size_shock.png` |
-| 18 | `fig:appendix_fe_comparison` | `liquidity_risk_predictions_comp.png` |
-| 19 | `fig:appendix_fe_comparison_solv` | `solvency_risk_prediction_comp.png` |
-| 20 | `fig:rf_benchmark_liquidity` | `liquidity_RF.png` |
-| 21 | `fig:rf_benchmark_solvency` | `solvency_RF_new.png` |
+Tovanich, N., Kitzler, S., Makridis, C., Marcassa, S. and Prat, J. "Shock Propagation in
+Decentralized Lending Networks: Evidence from the Compound Protocol."
