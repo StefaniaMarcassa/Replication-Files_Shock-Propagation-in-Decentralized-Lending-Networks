@@ -24,7 +24,7 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Then open any notebook in `code/notebooks/` and run it top to bottom.
+Then open any notebook in `code/` and run it top to bottom.
 
 ### The analysis panel
 
@@ -71,8 +71,8 @@ from the top. Its first cells rebuild the panel from the eleven source files.
 | `Robustness_old_vs_new` | **Table 4**, health-restoring against close-factor liquidation |
 | `predictive_tests_STANDALONE` | The Clark–West comparisons in the note to Table 2 |
 
-`code/exploratory/` holds notebooks used during the project that no paper output depends
-on. They are kept for transparency and are not needed to reproduce anything.
+`Regressions_REVISION_liq_real.ipynb` is `Regressions_REVISION.ipynb` run on the
+close-factor simulation output. The two differ on three lines, all filenames.
 
 ## Simulation code
 
@@ -100,12 +100,10 @@ simulation scripts, not by the notebooks.
 ## Repository layout
 
 ```
-code/
-  notebooks/     analysis notebooks, outputs stripped
-  simulation/    shock-propagation code and the debtrank module
-  exploratory/   not needed to reproduce the paper
-data/
-  analysis_panel.csv.gz
+code/              analysis notebooks, outputs stripped
+code/simulation/   shock-propagation code and the debtrank module
+data/              analysis_panel.csv.gz
+paper/             manuscript and figures
 ```
 
 `data/` is otherwise empty in git. The Zenodo files land there.
