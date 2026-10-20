@@ -6,8 +6,7 @@ The repository holds the code and one analysis-ready panel, about 17 MB in total
 simulation output, roughly 1 GB, is deposited separately because GitHub cannot host files
 of that size.
 
-**Data: `DOI_PLACEHOLDER`** (Zenodo). Replace this line with the DOI once the deposit is
-published.
+**Data:** [https://doi.org/10.5281/zenodo.23456346](https://doi.org/10.5281/zenodo.23456346)
 
 ---
 
@@ -76,34 +75,22 @@ close-factor simulation output. The two differ on three lines, all filenames.
 
 ## Simulation code
 
-`code/simulation/` contains the shock-propagation simulation that produces the liquidation
-files. It is not needed to reproduce the paper from the analysis panel.
-
-| Script | Produces |
-|---|---|
-| `liquidation.py` | Health-restoring liquidation, crypto pools |
-| `liquidation2.py` | Health-restoring liquidation, ETH and WBTC jointly |
-| `liquidation_real.py` | Close-factor liquidation |
-| `liquidation_real_mul.py` | Close-factor liquidation with an intraday price multiplier |
-| `statistics.py` | Network statistics, centralities and the user-level feature files |
-
-All four liquidation scripts begin with `from debtrank import *`, which resolves to
-`code/simulation/debtrank.py` in this repository.
+The shock-propagation simulation that produces the liquidation files is available from
+the authors on request. It is not needed to reproduce the paper, since the analysis panel
+already contains its output.
 
 ---
 
 ## Requirements
 
-Python 3.9. See `requirements.txt`. `networkit` and `pathos` are needed only by the
-simulation scripts, not by the notebooks.
+Python 3.9. See `requirements.txt`.
 
 ## Repository layout
 
 ```
-code/              analysis notebooks, outputs stripped
-code/simulation/   shock-propagation code and the debtrank module
-data/              analysis_panel.csv.gz
-paper/             manuscript and figures
+code/     analysis notebooks, outputs stripped
+data/     analysis_panel.csv.gz
+paper/    manuscript and figures
 ```
 
 `data/` is otherwise empty in git. The Zenodo files land there.
