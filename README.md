@@ -66,7 +66,7 @@ own. The numbering follows the order in which the results appear in the paper.
 | `03_incremental_value_liquidity` | Table 2 and Figure 13, liquidity |
 | `04_incremental_value_solvency` | Table 2 and Figure 13, solvency |
 | `05_predictive_tests` | The Clark–West comparisons in the note to Table 2 |
-| `06_liquidation_rule_comparison` | **Table 4**, health-restoring against close-factor liquidation |
+| `06_liquidation_rule_comparison` | Table 4, health-restoring against close-factor liquidation |
 | `07_shock_size_robustness` | Figure 12 |
 | `08_borrower_features_robustness` | Figure 16, robustness to borrower features |
 | `09_random_forest_liquidity` | Figure 20, random-forest benchmark, liquidity |
