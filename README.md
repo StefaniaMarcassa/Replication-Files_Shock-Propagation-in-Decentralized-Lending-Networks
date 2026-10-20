@@ -61,18 +61,23 @@ own. The numbering follows the order in which the results appear in the paper.
 
 | Notebook | Paper outputs |
 |---|---|
-| `01_descriptive_statistics` | Descriptive statistics. Figures 3, 4, 5, 6 and 8 |
-| `02_main_regressions` | The main liquidity and solvency regressions. Figures 7, 9, 10, 11, 17, 18 and 19; the model-comparison and coefficient tables in Appendix F |
+| `01_descriptive_figures` | Descriptive figures. Figures 3, 4, 5, 6 and 8. The descriptive statistics in Tables 7 and 8 come from `02_main_regressions` |
+| `02_main_regressions` | The main liquidity and solvency regressions. Tables 7 and 8, Tables 9 to 12 in Appendix F, Table 14 in Appendix H; Figures 7, 9, 10, 11, 17, 18 and 19 |
 | `03_incremental_value_liquidity` | Table 2 and Figure 13, liquidity |
 | `04_incremental_value_solvency` | Table 2 and Figure 13, solvency |
-| `05_predictive_tests` | The Clark–West comparisons in the note to Table 2 |
-| `06_liquidation_rule_comparison` | Table 4, health-restoring against close-factor liquidation |
+| `05_predictive_tests` | Table 13 in Appendix G, and the Clark–West comparisons in the note to Table 2 |
+| `06_liquidation_rule_comparison` | **Table 4**, health-restoring against close-factor liquidation |
 | `07_shock_size_robustness` | Figure 12 |
 | `08_borrower_features_robustness` | Figure 16, robustness to borrower features |
 | `09_random_forest_liquidity` | Figure 20, random-forest benchmark, liquidity |
 | `10_random_forest_solvency` | Figure 21, random-forest benchmark, solvency |
 | `11_simulated_vs_realized` | Appendix D. Figures 14 and 15, simulated against realized liquidations |
 | `12_main_regressions_close_factor` | The specifications of `02_main_regressions` refitted to the close-factor simulation output. The two notebooks differ on three lines, all filenames |
+
+Tables 1, 3, 5 and 6 are not produced by code. They are written directly in the
+manuscript: the balance-sheet structure, the comparison of protocol designs, the node
+feature definitions and the predictor list. Figures 1 and 2 are likewise drawn rather
+than estimated.
 
 ## Simulation code
 
