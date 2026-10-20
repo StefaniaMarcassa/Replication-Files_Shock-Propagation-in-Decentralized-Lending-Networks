@@ -56,22 +56,23 @@ from the top. Its first cells rebuild the panel from the eleven source files.
 
 ## What each notebook produces
 
+They are independent of one another: each reads the analysis panel and can be run on its
+own. The numbering follows the order in which the results appear in the paper.
+
 | Notebook | Paper outputs |
 |---|---|
-| `Regressions_REVISION` | The main liquidity and solvency regressions. Figures 7, 9, 10, 11, 17, 18 and 19; the model-comparison and coefficient tables in Appendix F |
-| `Regressions_DesStats_REVISION` | Descriptive statistics. Figures 3, 4, 5, 6 and 8 |
-| `incremental_liquidity_REVISION_new` | Table 2 and Figure 13, liquidity |
-| `incremental_solvency_REVISION_new` | Table 2 and Figure 13, solvency |
-| `incremental_liquidity_RF_REVISION` | Figure 20, random-forest benchmark, liquidity |
-| `incremental_solvency_RF_REVISION` | Figure 21, random-forest benchmark, solvency |
-| `DataVSSimul_REVISION` | Appendix D. Figures 14 and 15, simulated against realized liquidations |
-| `Regressions_april29_B_all_size_shocks` | Figure 12 |
-| `Regressions_REVISION_all_size_shocks_with_borrowers` | Figure 16, robustness to borrower features |
-| `Robustness_old_vs_new` | **Table 4**, health-restoring against close-factor liquidation |
-| `predictive_tests_STANDALONE` | The Clark–West comparisons in the note to Table 2 |
-
-`Regressions_REVISION_liq_real.ipynb` is `Regressions_REVISION.ipynb` run on the
-close-factor simulation output. The two differ on three lines, all filenames.
+| `01_descriptive_statistics` | Descriptive statistics. Figures 3, 4, 5, 6 and 8 |
+| `02_main_regressions` | The main liquidity and solvency regressions. Figures 7, 9, 10, 11, 17, 18 and 19; the model-comparison and coefficient tables in Appendix F |
+| `03_incremental_value_liquidity` | Table 2 and Figure 13, liquidity |
+| `04_incremental_value_solvency` | Table 2 and Figure 13, solvency |
+| `05_predictive_tests` | The Clark–West comparisons in the note to Table 2 |
+| `06_liquidation_rule_comparison` | **Table 4**, health-restoring against close-factor liquidation |
+| `07_shock_size_robustness` | Figure 12 |
+| `08_borrower_features_robustness` | Figure 16, robustness to borrower features |
+| `09_random_forest_liquidity` | Figure 20, random-forest benchmark, liquidity |
+| `10_random_forest_solvency` | Figure 21, random-forest benchmark, solvency |
+| `11_simulated_vs_realized` | Appendix D. Figures 14 and 15, simulated against realized liquidations |
+| `12_main_regressions_close_factor` | The specifications of `02_main_regressions` refitted to the close-factor simulation output. The two notebooks differ on three lines, all filenames |
 
 ## Simulation code
 
