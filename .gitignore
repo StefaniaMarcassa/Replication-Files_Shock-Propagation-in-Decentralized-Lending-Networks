@@ -1,4 +1,4 @@
-# Data. Everything except the analysis panel comes from the Zenodo deposit.
+# Data. Everything except the analysis panel comes from the Dataverse deposit.
 data/*
 !data/analysis_panel.csv.gz
 !data/.gitkeep
