@@ -6,8 +6,7 @@ This repository holds the analysis code. The data it reads, roughly 1 GB of simu
 output and feature files, is archived separately because GitHub cannot host files of that
 size.
 
-**Data:** [https://doi.org/10.7910/DVN/XXXXXX](https://doi.org/10.7910/DVN/XXXXXX)
-(Harvard Dataverse)
+**Data:** [10.5281/zenodo.23456345](https://doi.org/10.5281/zenodo.23456346)
 
 ---
 
