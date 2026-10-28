@@ -112,5 +112,4 @@ Compound V2 activity was negligible. Section 4.1 of the paper gives the details.
 ## Citation
 
 Tovanich, N., Kitzler, S., Makridis, C., Marcassa, S. and Prat, J. "Shock Propagation in
-Decentralized Lending Networks: Evidence from the Compound Protocol." *Review of Finance*,
-forthcoming.
+Decentralized Lending Networks: Evidence from the Compound Protocol."
