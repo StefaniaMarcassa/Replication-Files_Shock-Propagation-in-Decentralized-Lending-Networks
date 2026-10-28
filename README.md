@@ -2,35 +2,44 @@
 
 Replication code for the paper. Tovanich, Kitzler, Makridis, Marcassa and Prat.
 
-The repository holds the code and one analysis-ready panel, about 17 MB in total. The full
-simulation output, roughly 1 GB, is deposited separately because GitHub cannot host files
-of that size.
+This repository holds the analysis code. The data it reads, roughly 1 GB of simulation
+output and feature files, is archived separately because GitHub cannot host files of that
+size.
 
-**Data:** [https://doi.org/10.5281/zenodo.23456346](https://doi.org/10.5281/zenodo.23456346)
+**Data:** [https://doi.org/10.7910/DVN/XXXXXX](https://doi.org/10.7910/DVN/XXXXXX)
+(Harvard Dataverse)
 
 ---
 
 ## Reproducing the paper
 
-Every table and figure can be reproduced from `data/analysis_panel.csv.gz`, which ships
-with this repository. You do not need the Zenodo deposit unless you want to rerun the
-simulation or rebuild the panel.
-
 ```bash
 git clone https://github.com/StefaniaMarcassa/Replication-Files_Shock-Propagation-in-Decentralized-Lending-Networks.git
 cd Replication-Files_Shock-Propagation-in-Decentralized-Lending-Networks
 pip install -r requirements.txt
+```
+
+Download the eleven source files from the Dataverse deposit into `data/`. The notebooks
+read them from there and will not run without them. `data/README.md` lists the files and
+says which notebooks use each one.
+
+```bash
 jupyter lab
 ```
 
-Then open any notebook in `code/` and run it top to bottom.
+Then open any notebook in `code/` and run it top to bottom. The notebooks are independent
+of one another: each builds the panel it needs in its first cells, so they can be run in
+any order or on their own.
 
 ### The analysis panel
 
-`data/analysis_panel.csv.gz` is 151,440 rows by 168 columns: the four analysis pools
-(ETH, WBTC, DAI, USDC), daily from 1 January 2021 to 15 June 2024, at ten shock sizes and
-three health thresholds. It is the merge of the simulation output and the feature files,
-which the notebooks otherwise build in their first dozen cells.
+`data/analysis_panel.csv.gz` ships with this repository. It is the merge of the simulation
+output and the feature files that the notebooks otherwise build for themselves: 151,440
+rows by 168 columns, the four analysis pools (ETH, WBTC, DAI, USDC), daily from 1 January
+2021 to 15 June 2024, at ten shock sizes and three health thresholds.
+
+The notebooks do not read it. It is here so that the estimation sample can be inspected,
+or reused in other work, without downloading the full deposit.
 
 Filtering it to the estimation sample reproduces the paper's samples exactly:
 
@@ -47,17 +56,11 @@ crypto = panel[(panel['asset_group'] == 'Crypto')
 
 Stablecoin specifications use `asset_group == 'Stablecoin'` and `size == 1.00`.
 
-### Rebuilding the panel from the raw simulation output
-
-Download the Zenodo deposit into `data/`, then run `code/notebooks/Regressions_REVISION.ipynb`
-from the top. Its first cells rebuild the panel from the eleven source files.
-
 ---
 
 ## What each notebook produces
 
-They are independent of one another: each reads the analysis panel and can be run on its
-own. The numbering follows the order in which the results appear in the paper.
+The numbering follows the order in which the results appear in the paper.
 
 | Notebook | Paper outputs |
 |---|---|
@@ -79,13 +82,10 @@ manuscript: the balance-sheet structure, the comparison of protocol designs, the
 feature definitions and the predictor list. Figures 1 and 2 are likewise drawn rather
 than estimated.
 
-## Simulation code
-
-The shock-propagation simulation that produces the liquidation files is available from
-the authors on request. It is not needed to reproduce the paper, since the analysis panel
-already contains its output.
-
 ---
+## Simulation
+
+The shock-propagation simulation that produces the liquidation*.csv files is available from the authors on request. It is not needed to reproduce the paper, since its output is among the deposited files.
 
 ## Requirements
 
@@ -95,11 +95,12 @@ Python 3.9. See `requirements.txt`.
 
 ```
 code/     analysis notebooks, outputs stripped
-data/     analysis_panel.csv.gz
+data/     analysis_panel.csv.gz, plus the deposited files once downloaded
 paper/    manuscript and figures
 ```
 
-`data/` is otherwise empty in git. The Zenodo files land there.
+Only `analysis_panel.csv.gz` is tracked in `data/`. The deposited files are ignored by
+git, so they can be downloaded into the same folder without disturbing the repository.
 
 ## Data sources
 
@@ -111,4 +112,5 @@ Compound V2 activity was negligible. Section 4.1 of the paper gives the details.
 ## Citation
 
 Tovanich, N., Kitzler, S., Makridis, C., Marcassa, S. and Prat, J. "Shock Propagation in
-Decentralized Lending Networks: Evidence from the Compound Protocol."
+Decentralized Lending Networks: Evidence from the Compound Protocol." *Review of Finance*,
+forthcoming.
