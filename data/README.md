@@ -1,18 +1,28 @@
 # Data
 
 The notebooks in `code/` read their inputs from this folder (`DATA_PATH = '../data/'`).
-Place the following files here:
+Download the eleven files below from the Dataverse deposit and place them here:
 
-| File | Used by |
+**[https://doi.org/10.7910/DVN/XXXXXX](https://doi.org/10.7910/DVN/XXXXXX)**
+
+Nothing in `code/` runs without them.
+
+| File | Read by |
 |---|---|
-| `liquidation.csv` | all regression / incremental notebooks, `Robustness_old_vs_new` |
-| `liquidation_pools.csv` | all regression / incremental notebooks, `Robustness_old_vs_new` |
-| `liquidation_real.csv` | `Regressions_REVISION_liq_real`, `Robustness_old_vs_new` |
-| `liquidation_pools_real.csv` | `Regressions_REVISION_liq_real`, `Robustness_old_vs_new` |
-| `liquidation_pools_real_mul.csv` | `DataVSSimul_REVISION` |
-| `financialDailySnapshots.csv` | `DataVSSimul_REVISION` |
-| `pool_statistics_with_cf.csv` | all regression / incremental notebooks |
-| `pool_centralities.csv` | all regression / incremental notebooks |
-| `network_statistics.csv` | all regression / incremental notebooks |
-| `shockAsset_lenders_borrowers_new.csv` | all regression / incremental notebooks |
-| `shockAsset_collateral_filtered.csv` | all regression / incremental notebooks |
+| `liquidation.csv` | `01` to `10` |
+| `liquidation_pools.csv` | `01` to `10` |
+| `pool_statistics_with_cf.csv` | `01` to `10`, `12` |
+| `pool_centralities.csv` | `01` to `10`, `12` |
+| `network_statistics.csv` | `01` to `10`, `12` |
+| `shockAsset_lenders_borrowers_new.csv` | `01` to `10`, `12` |
+| `shockAsset_collateral_filtered.csv` | `01` to `10`, `12` |
+| `liquidation_real.csv` | `06`, `12` |
+| `liquidation_pools_real.csv` | `06`, `12` |
+| `liquidation_pools_real_mul.csv` | `11` |
+| `financialDailySnapshots.csv` | `11` |
+
+The `_real` files hold the close-factor simulation output, which `06` compares against the
+health-restoring rule and `12` refits the main specifications to.
+
+`analysis_panel.csv.gz` is tracked in this repository and is not part of the deposit. It is
+the merged panel, provided for inspection. No notebook reads it; see the main README.
