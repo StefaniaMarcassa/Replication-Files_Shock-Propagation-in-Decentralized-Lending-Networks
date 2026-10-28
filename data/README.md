@@ -3,7 +3,7 @@
 The notebooks in `code/` read their inputs from this folder (`DATA_PATH = '../data/'`).
 Download the eleven files below from the Dataverse deposit and place them here:
 
-**[https://doi.org/10.7910/DVN/XXXXXX](https://doi.org/10.7910/DVN/XXXXXX)**
+**[https://doi.org/10.5281/zenodo.23456346]**
 
 Nothing in `code/` runs without them.
 
